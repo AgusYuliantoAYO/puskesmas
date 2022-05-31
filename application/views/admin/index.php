@@ -56,6 +56,7 @@
                                                         <th scope="col">Content</th>
                                                         <th scope="col">Date</th>
                                                         <th scope="col">Username</th>
+                                                        <th scope="col">Act</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -71,7 +72,14 @@
                                                         <th><small><b><?= $dm['date']; ?></b></small></th>
                                                         <th><small><b><?= $dm['username']; ?></b></small></th>
                                                         <!-- <th>?= $dm['role_id'];?></th> -->
+                                                        <th>
+                                                            <a href="<?= base_url('admin/editPost/') . $dm['idpost']; ?>"
+                                                                class="badge badge-success">Edit</a>
 
+                                                            <a href="<?= base_url(); ?>admin/hapusPost/<?= $dm['kd_news'] ?>"
+                                                                class="far fa-trash-alt btn btn-sm btn-danger tombol-hapus"></a>
+
+                                                        </th>
                                                     </tr>
                                                     <!-- ?php $i++; ?> -->
                                                     <?php endforeach; ?>

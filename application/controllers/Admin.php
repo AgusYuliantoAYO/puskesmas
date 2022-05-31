@@ -125,7 +125,7 @@ class Admin extends CI_Controller
             $this->db->insert('post', $data);
             $this->session->set_flashdata('message', '<div class="alert 
           alert-success" role="alert"> New Account added </div>');
-            redirect('admin/account');
+            redirect('admin');
         }
     }
 }
