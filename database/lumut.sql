@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2022 pada 09.08
+-- Waktu pembuatan: 31 Bulan Mei 2022 pada 23.10
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.12
 
@@ -39,11 +39,8 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`username`, `password`, `name`, `role`) VALUES
-('a', '$2y$10$W6Mk2rmpVxtdkwK.UD6hDuaBZWzEnXamGY95.NVyduHSKyJvnXLDi', 'Author', '2'),
 ('admin', '$2y$10$W6Mk2rmpVxtdkwK.UD6hDuaBZWzEnXamGY95.NVyduHSKyJvnXLDi', 'admin', '1'),
-('anton', '$2y$10$ZT1oWh3aB87vm5NLs40k4u9wPLxbev5Q0CXD8Fiqi2mMRlN/V31nW', 'Anton', '2'),
-('author', '$2y$10$iEUoZRf1J93RZaG5VEeEleHn1i5ShhqIjaTkU14rcDF/htvdB25hO', 'author', '2'),
-('Paijo', '$2y$10$V35b5voISzDqxhmhvDEFBuAQUbw/ZfbGy/b2ABN95DGj.T3d66.PS', 'paijo', '1');
+('author', '$2y$10$iEUoZRf1J93RZaG5VEeEleHn1i5ShhqIjaTkU14rcDF/htvdB25hO', 'author', '2');
 
 -- --------------------------------------------------------
 
@@ -58,6 +55,14 @@ CREATE TABLE `post` (
   `date` datetime NOT NULL,
   `username` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `post`
+--
+
+INSERT INTO `post` (`idpost`, `title`, `content`, `date`, `username`) VALUES
+(6, 'Test', 'Content Test Bisaa bgt', '2022-05-31 21:52:30', 'admin'),
+(8, 'Test lagi', 'Content Test', '2022-05-31 22:45:47', 'author');
 
 --
 -- Indexes for dumped tables
@@ -84,7 +89,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT untuk tabel `post`
 --
 ALTER TABLE `post`
-  MODIFY `idpost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idpost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
