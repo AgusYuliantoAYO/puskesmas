@@ -36,48 +36,9 @@ class Admin extends CI_Controller
     // ===Tambah Akun 
     public function dataAccount()
     {
-        //load Model
-        //    $this->load->model('news_model','data_news');
-
-        //load library
-        //    $this->load->library('pagination');
-
-
-        //    // Search / Ambil data Keyword
-        //        if($this->input->post('submit'))
-        //        {
-        //            $data['keyword'] = $this->input->post('keyword');
-
-        //            $this->session->set_userdata('keyword', $data['keyword']);
-        //        } else {
-        //            $data['keyword'] = $this->session->userdata('keyword');
-        //        }
-        // ================ ======================
-
-        //    //   pagination
-        //    $this->db->like('judul_news', $data['keyword']);
-        //    $this->db->or_like('deskripsi_news', $data['keyword']);
-        //    $this->db->from('data_news');
-        //    $config['base_url'] = 'http://localhost/donasi-login/Admin/dataNews';
-        //    $config['num_links'] = 5;
-        //    $config['total_rows'] = $this->db->count_all_results();
-        //    $data['total_rows'] = $config['total_rows'];
-        //    $config['per_page'] = 3;
-
-        //    //initialize
-        //    $this->pagination->initialize($config);
-
-
-
-        //    $data['start'] = $this->uri->segment(3);
-        //    $data['data_news'] = $this->data_news->getNews($config['per_page'], $data['start'], $data['keyword']);
-
-        // Kode Unik ID
-        // $this->load->model('news_model');
-        // $kd_news = $this->news_model->CreateCode();
-
         // .........
         $data['title'] = 'Tambah Account';
+        $data['data_account'] = $this->db->get_where('account')->result_array();
         $data['user'] = $this->db->get_where(
             'account',
             ['username' => $this->session->userdata('username')]
@@ -105,6 +66,66 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert 
             alert-success" role="alert"> New Account added </div>');
             redirect('admin');
+        }
+    }
+
+
+    // ============ //akun ==============
+
+    // ===Tambah Akun 
+    public function account()
+    {
+
+        $this->form_validation->set_rules('username', 'username', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('flash', ' Login Dulu');
+            $data['title'] = 'account';
+            $data['user'] = $this->db->get_where('account', ['username' => $this->session->userdata('username')])->row_array();
+
+            $data['data_account'] = $this->db->get_where('account')->result_array();
+            // .......
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('templates/login_topbar', $data);
+            $this->load->view('admin/account', $data);
+            $this->load->view('templates/auth_footer', $data);
+        } else {
+            //Validasinya Sukses
+            // $this->_login();
+        }
+    }
+    public function dataPost()
+    {
+        // .........
+        $data['title'] = 'Tambah Post';
+        $data['data_post'] = $this->db->get_where('post')->result_array();
+        $data['user'] = $this->db->get_where(
+            'account',
+            ['username' => $this->session->userdata('username')]
+        )
+            ->row_array();
+        // $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('title', 'title', 'required');
+        $this->form_validation->set_rules('content', 'content', 'required');
+        // $this->form_validation->set_rules('role', 'Role', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('templates/login_topbar', $data);
+            $this->load->view('admin/index', $data);
+            $this->load->view('templates/auth_footer', $data);
+        } else {
+            $data = [
+                'title' => $this->input->post('title'),
+                'content' => $this->input->post('content'),
+                'date' => date('Y-m-d H:i:s'),
+                'username' => $this->input->post('username'),
+            ];
+            $this->db->insert('post', $data);
+            $this->session->set_flashdata('message', '<div class="alert 
+          alert-success" role="alert"> New Account added </div>');
+            redirect('admin/account');
         }
     }
 }
