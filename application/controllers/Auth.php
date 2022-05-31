@@ -69,95 +69,6 @@ class Auth extends CI_Controller
 
 
 
-    public function reg()
-    {
-
-        // =========================ALAMAT=
-        $this->load->model('produk_model');
-        $id_alamat = $this->produk_model->CreateCodeAlamat();
-        // =========================ALAMAT=
-
-        if ($this->session->userdata('email')) {
-            redirect('user');
-        }
-        // rulesnya 
-        // ga boleh kosong
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('wa', 'Wa', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'is_unique' => 'this email has already registered!'
-        ]);
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password dont match !',
-            'min_length' => 'Password too short !'
-        ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
-        $this->form_validation->set_rules('kota', 'Kota', 'required');
-        $this->form_validation->set_rules('kode_pos', 'Kode Pos', 'required');
-
-
-
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Donatur Registration';
-            $this->load->view('templates/auth_header', $data);
-            $this->load->view('auth/reg');
-            $this->load->view('templates/auth_footer');
-        } else {
-            $email = $this->input->post('email', true);
-            $data = [
-                'name' => htmlspecialchars($this->input->post('name', true)),
-                'wa' => htmlspecialchars($this->input->post('wa', true)),
-                'alamat' => $this->input->post('alamat'),
-                'kota' => $this->input->post('kota'),
-                'email' => htmlspecialchars($email),
-                'image' => 'default.jpg',
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 0,
-                'date_created' => time()
-            ];
-            //alamat
-            $dataalamat = [
-                'id_alamat' => $id_alamat,
-                'email' => htmlspecialchars($email),
-                'alamat' => $this->input->post('alamat'),
-                'provinsi' => $this->input->post('provinsi'),
-                'kota' => $this->input->post('kota'),
-                'kode_pos' => $this->input->post('kode_pos'),
-            ];
-
-            //siapkan token
-            $token = base64_encode(random_bytes(32));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
-            ];
-
-
-
-            $this->db->insert('user', $data);
-            $this->db->insert('data_alamat', $dataalamat);
-            $this->db->insert('user_token', $user_token);
-
-            //kirim email Aktivasi
-
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-				Selamat! Silahkan <b>cek Email</b> untuk <b>Aktifasi</b> </div>');
-            redirect('auth');
-        }
-    }
-
-
-    // ================================================
-
-
-
-
 
     public function logout()
     {
@@ -171,6 +82,6 @@ class Auth extends CI_Controller
 
     public function blocked()
     {
-        $this->load->view('auth/blocked');
+        $this->load->view('errorrs/blocked');
     }
 }

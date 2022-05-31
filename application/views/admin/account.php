@@ -60,6 +60,7 @@
                                                         <th scope="col">Password</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Role</th>
+                                                        <th scope="col">Act</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -73,6 +74,12 @@
                                                         <th><small><b><?= $da['password']; ?></b></small></th>
                                                         <th><small><b><?= $da['name']; ?></b></small></th>
                                                         <th><small><b><?= $da['role']; ?></b></small></th>
+                                                        <th>
+                                                            <a href="<?= base_url('admin/editAccount/') . $da['username']; ?>"
+                                                                class="badge badge-success">Edit</a>
+                                                            <a href="<?= base_url(); ?>admin/hapusAccount/<?= $da['username'] ?>"
+                                                                class="bi bi-trash-fill btn btn-sm btn-danger tombol-hapus">Delete</a>
+                                                        </th>
                                                     </tr>
                                                     <?php endforeach; ?>
 

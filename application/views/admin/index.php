@@ -18,6 +18,8 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+
+
 </head>
 
 <body class="bg-seccondary">
@@ -71,17 +73,17 @@
                                                         <th><small><b><?= $dm['content']; ?></b></small></th>
                                                         <th><small><b><?= $dm['date']; ?></b></small></th>
                                                         <th><small><b><?= $dm['username']; ?></b></small></th>
-                                                        <!-- <th>?= $dm['role_id'];?></th> -->
+
                                                         <th>
                                                             <a href="<?= base_url('admin/editPost/') . $dm['idpost']; ?>"
                                                                 class="badge badge-success">Edit</a>
 
-                                                            <a href="<?= base_url(); ?>admin/hapusPost/<?= $dm['kd_news'] ?>"
-                                                                class="far fa-trash-alt btn btn-sm btn-danger tombol-hapus"></a>
+                                                            <a href="<?= base_url(); ?>admin/hapusPost/<?= $dm['idpost'] ?>"
+                                                                class="bi bi-trash-fill btn btn-sm btn-danger tombol-hapus">Delete</a>
+
 
                                                         </th>
                                                     </tr>
-                                                    <!-- ?php $i++; ?> -->
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>

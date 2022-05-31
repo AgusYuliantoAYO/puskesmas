@@ -39,6 +39,7 @@
                             <!-- </div> -->
                         </span>
                     </a>
+
                     <!-- </nav> -->
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

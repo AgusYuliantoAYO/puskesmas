@@ -20,13 +20,13 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-white">
 
     <div class="container">
 
-        <!-- Outer Row -->
-
-
+        <div align="center">
+            <img class="img-profile col-md-6" src="<?= base_url('assets/img/logo.png') ?>">
+        </div>
     </div>
 
 </body>
