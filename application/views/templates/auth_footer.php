@@ -1,10 +1,10 @@
    <!-- Footer -->
-   <footer class="sticky-footer bg-primary">
+   <footer class="sticky-footer bg-seccondary">
        <div class="container my-auto">
 
 
            <div class="copyright text-center my-auto">
-               <span style="color:white; font-weight:bold">Copyright &copy; AYo Donasi <?= date('Y') ?></span>
+               <span style="color:black; font-weight:bold">Copyright &copy; AYo Donasi <?= date('Y') ?></span>
            </div>
 
 
@@ -37,7 +37,7 @@
                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                <div class="modal-footer">
                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                   <a class="btn btn-primary" href="<?= base_url('auth/logout'); ?>">Logout</a>
+                   <a class="btn btn-danger" href="<?= base_url('auth/logout'); ?>">Logout</a>
                </div>
            </div>
        </div>
