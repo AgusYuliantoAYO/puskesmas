@@ -91,7 +91,7 @@
 
 
                                 </div>
-                                <a href="http://localhost:8080/test-lumut/admin" class="btn btn-secondary btn-lg"
+                                <a href="http://localhost:8080/puskesmas/admin" class="btn btn-secondary btn-lg"
                                     tabindex="-1" role="button" aria-disabled="true">Post</a>
                                 <!-- =========================data -->
                             </div>

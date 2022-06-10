@@ -8,6 +8,8 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+
+        // is_logged_in();
     }
 
     public function index()
@@ -23,16 +25,60 @@ class Admin extends CI_Controller
             $data['data_post'] = $this->db->get_where('post')->result_array();
             $data['data_account'] = $this->db->get_where('account')->result_array();
             // .......
-            $this->load->view('templates/auth_header', $data);
+            // $this->load->view('templates/auth_header', $data);
             $this->load->view('templates/login_topbar', $data);
+            $this->load->view('templates/login_sidebar', $data);
             $this->load->view('admin/index', $data);
-            $this->load->view('templates/auth_footer', $data);
+            $this->load->view('templates/login_footer', $data);
         } else {
             //Validasinya Sukses
             // $this->_login();
         }
     }
 
+
+    ///////////POST
+    public function dataPost()
+    {
+        // .........
+        // $data['title'] = 'Tambah Post';
+        $data['data_post'] = $this->db->get_where('post')->result_array();
+        $data['user'] = $this->db->get_where(
+            'account',
+            ['username' => $this->session->userdata('username')]
+        )
+            ->row_array();
+
+        $data['data_post'] = $this->db->get_where('post')->result_array();
+        $data['data_account'] = $this->db->get_where('account')->result_array();
+
+        $this->form_validation->set_rules('title', 'title', 'required');
+        $this->form_validation->set_rules('content', 'content', 'required');
+
+        if ($this->form_validation->run() == false) {
+            // $this->load->view('templates/auth_header', $data);
+            $this->load->view('templates/login_topbar', $data);
+            $this->load->view('templates/login_sidebar', $data);
+            $this->load->view('admin/post', $data);
+            $this->load->view('templates/login_footer', $data);
+        } else {
+            $data = [
+                'title' => $this->input->post('title'),
+                'content' => $this->input->post('content'),
+                'date' => date('Y-m-d H:i:s'),
+                'username' => $this->input->post('username'),
+            ];
+            $this->db->insert('post', $data);
+            $this->session->set_flashdata('message', '<div class="alert 
+          alert-success" role="alert"> New Account added </div>');
+            redirect('admin');
+        }
+    }
+    //=============POST
+    // public function dataPost()
+    // {
+
+    // }
     // ===Tambah Akun 
     public function dataAccount()
     {
@@ -143,37 +189,7 @@ class Admin extends CI_Controller
 
 
     // ============================= akun 
-    public function dataPost()
-    {
-        // .........
-        $data['title'] = 'Tambah Post';
-        $data['data_post'] = $this->db->get_where('post')->result_array();
-        $data['user'] = $this->db->get_where(
-            'account',
-            ['username' => $this->session->userdata('username')]
-        )
-            ->row_array();
-        $this->form_validation->set_rules('title', 'title', 'required');
-        $this->form_validation->set_rules('content', 'content', 'required');
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/auth_header', $data);
-            $this->load->view('templates/login_topbar', $data);
-            $this->load->view('admin/index', $data);
-            $this->load->view('templates/auth_footer', $data);
-        } else {
-            $data = [
-                'title' => $this->input->post('title'),
-                'content' => $this->input->post('content'),
-                'date' => date('Y-m-d H:i:s'),
-                'username' => $this->input->post('username'),
-            ];
-            $this->db->insert('post', $data);
-            $this->session->set_flashdata('message', '<div class="alert 
-          alert-success" role="alert"> New Account added </div>');
-            redirect('admin');
-        }
-    }
 
     public function hapusPost($idpost)
     {

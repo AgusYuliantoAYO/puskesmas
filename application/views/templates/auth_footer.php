@@ -4,7 +4,7 @@
 
 
            <div class="copyright text-center my-auto">
-               <span style="color:black; font-weight:bold">Copyright &copy; AYo Donasi <?= date('Y') ?></span>
+               <span style="color:black; font-weight:bold">Copyright &copy; Agus Yulianto <?= date('Y') ?></span>
            </div>
 
 
@@ -52,6 +52,9 @@
 
    <!-- Custom scripts for all pages-->
    <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
+
+   <link href="<?= base_url('assets/'); ?>css/owl.carousel.min.css" rel="stylesheet">
+   <link href="<?= base_url('assets/'); ?>css/owl.theme.default.min.css" rel="stylesheet">
 
    </body>
 

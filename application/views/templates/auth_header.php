@@ -14,7 +14,7 @@
     <title>
         <?= $title; ?>
     </title>
- 
+
     <!-- Custom fonts for this template-->
     <!-- <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link
@@ -27,7 +27,8 @@
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>img/logo/shortcut.png" rel="shortcut icon">
 
-
+    <!-- <link rel="stylesheet" href="?php echo base_url('css/owl.carousel.min.css'); ?>">
+    <link rel="stylesheet" href="?php echo base_url('css/owl.theme.default.min.css'); ?>"> -->
 
 </head>
 

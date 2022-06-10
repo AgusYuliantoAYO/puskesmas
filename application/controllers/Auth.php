@@ -10,6 +10,8 @@ class Auth extends CI_Controller
     }
     public function index()
     {
+        $this->load->model('model_post');
+
         if ($this->session->userdata('username')) {
             redirect('auth');
         }
@@ -21,6 +23,8 @@ class Auth extends CI_Controller
             $data['title'] = 'Beranda';
             $data['user'] = $this->db->get_where('account', ['username' => $this->session->userdata('username')])->row_array();
             $data['data_post'] = $this->db->get_where('post')->result_array();
+            $data['news'] = $this->model_post->tampilNews();
+
             // .......
             $this->load->view('templates/auth_header', $data);
             $this->load->view('templates/auth_topbar', $data);

@@ -24,4 +24,11 @@ class model_post extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+
+    public function tampilNews()
+    {
+        $this->db->order_by('date', 'DESC');
+        $query = $this->db->get('post');
+        return  $query->result();
+    }
 }
